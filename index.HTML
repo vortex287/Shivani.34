@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Grocery Store</title>
+
+<style>
+body{
+    background-color: lightyellow;
+    font-family: Arial;
+}
+
+h1{
+    text-align: center;
+    color: green;
+}
+
+table{
+    background-color: white;
+}
+</style>
+
+<script>
+function checkForm(form)
+{
+    if(form.username.value == "") 
+    {
+        alert("Error: Username cannot be blank!");
+        form.username.focus();
+        return false;
+    }
+
+    re = /[^&#*]/;
+    if(!re.test(form.username.value)) {
+        alert("Error: Username must contain only letters, numbers and underscores!");
+        form.username.focus();
+        return false;
+    }
+
+    // Address validation (only for order form)
+    if(form.address && form.address.value == "")
+    {
+        alert("Error: Address cannot be empty!");
+        form.address.focus();
+        return false;
+    }
+
+    if(form.pwd1.value != "" && form.pwd1.value == form.pwd2.value) 
+    {
+        if(form.pwd1.value.length < 6)
+        {
+            alert("Error: Password must contain at least six characters!");
+            form.pwd1.focus();
+            return false;
+        }
+
+        if(form.pwd1.value == form.username.value) {
+            alert("Error: Password must be different from Username!");
+            form.pwd1.focus();
+            return false;
+        }
+
+        re = /[0-9]/;
+        if(!re.test(form.pwd1.value)) 
+        {
+            alert("Error: password must contain at least one number (0-9)!");
+            form.pwd1.focus();
+            return false;
+        }
+
+        re = /[a-z]/;
+        if(!re.test(form.pwd1.value)) 
+        {
+            alert("Error: password must contain at least one lowercase letter (a-z)!");
+            form.pwd1.focus();
+            return false;
+        }
+
+        re = /[A-Z]/;
+        if(!re.test(form.pwd1.value)) 
+        {
+            alert("Error: password must contain at least one uppercase letter (A-Z)!");
+            form.pwd1.focus();
+            return false;
+        }
+    } 
+    else 
+    {
+        alert("Error: Please check that you've entered and confirmed your password!");
+        form.pwd1.focus();
+        return false;
+    }
+
+    alert("You entered a valid password: " + form.pwd1.value);
+    return true;
+}
+</script>
+
+</head>
+
+<body>
+
+<h1>Welcome to My Grocery Store</h1>
+
+<h2>Available Products</h2>
+
+<ul>
+<li>Rice</li>
+<li>Wheat</li>
+<li>Sugar</li>
+<li>Milk</li>
+<li>Bread</li>
+<li>Eggs</li>
+</ul>
+
+<h2>Product Price List</h2>
+
+<table border="1">
+<tr>
+<th>Product</th>
+<th>Price</th>
+</tr>
+
+<tr>
+<td>Rice</td>
+<td>₹50/kg</td>
+</tr>
+
+<tr>
+<td>Wheat</td>
+<td>₹40/kg</td>
+</tr>
+
+<tr>
+<td>Sugar</td>
+<td>₹45/kg</td>
+</tr>
+
+<tr>
+<td>Milk</td>
+<td>₹60/litre</td>
+</tr>
+
+</table>
+
+<h2>Customer Order Form</h2>
+
+<form onsubmit="return checkForm(this);">
+
+Name: <input type="text" name="username"><br><br>
+
+Phone: <input type="text"><br><br>
+
+Address:<br>
+<textarea name="address" rows="3" cols="30" placeholder="Enter your full address"></textarea><br><br>
+
+
+Select Product:
+<select>
+<option>Rice</option>
+<option>Wheat</option>
+<option>Sugar</option>
+<option>Milk</option>
+</select>
+
+<br><br>
+
+Quantity: <input type="number"><br><br>
+
+<input type="submit" value="Order Now">
+
+</form>
+
+<h2>Contact Us</h2>
+
+<form onsubmit="return checkForm(this);">
+
+Name: <input type="text" name="username"><br><br>
+
+Email: <input type="email"><br><br>
+
+
+
+Message:<br>
+<textarea></textarea><br><br>
+
+<input type="submit" value="Send Message">
+
+</form>
+
+</body>
+</html>
